@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Valentine ❤️</title>
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #ff4b7d, #ff85a2, #ffc2d1);
+      overflow-x: hidden;
+      color: white;
+      text-align: center;
+    }
+
+    /* Floating Hearts */
+    .heart-float {
+      position: fixed;
+      bottom: -50px;
+      font-size: 24px;
+      animation: floatUp 8s linear infinite;
+      opacity: 0.8;
+      pointer-events: none;
+    }
+
+    @keyframes floatUp {
+      0% { transform: translateY(0) scale(1); opacity: 1; }
+      100% { transform: translateY(-120vh) scale(1.5); opacity: 0; }
+    }
+
+    /* Intro Screen */
+    .intro {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .intro h1 {
+      font-size: 3rem;
+      margin-bottom: 20px;
+      animation: glow 2s infinite alternate;
+    }
+
+    @keyframes glow {
+      from { text-shadow: 0 0 10px #fff; }
+      to { text-shadow: 0 0 25px #ff004f; }
+    }
+
+    .start-btn {
+      padding: 15px 40px;
+      border: none;
+      border-radius: 40px;
+      background: #ff004f;
+      color: white;
+      font-size: 1.2rem;
+      cursor: pointer;
+      transition: 0.3s;
+      margin-top: 20px;
+    }
+
+    .start-btn:hover {
+      transform: scale(1.1);
+      background: #ff2f6d;
+    }
+
+    /* Main Container */
+    .container {
+      display: none;
+      max-width: 900px;
+      margin: auto;
+      padding: 30px 20px 60px;
+    }
+
+    /* Proposal Section */
+    .proposal h1 {
+      font-size: 2.8rem;
+      margin: 30px 0 10px;
+    }
+
+    .proposal p {
+      font-size: 1.1rem;
+      margin-bottom: 25px;
+    }
+
+    /* Buttons */
+    .buttons {
+      display: flex;
+      justify-content: center;
+      gap: 25px;
+      margin-bottom: 30px;
+      position: relative;
+    }
+
+    button {
+      padding: 12px 30px;
+      font-size: 1.1rem;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    #yesBtn {
+      background: #ff004f;
+      color: white;
+      font-weight: 600;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    }
+
+    #yesBtn:hover {
+      transform: scale(1.15);
+    }
+
+    #noBtn {
+      background: white;
+      color: #ff004f;
+      font-weight: 600;
+      position: absolute;
+    }
+
+    /* Message Box */
+    .message-box {
+      background: rgba(255,255,255,0.2);
+      padding: 25px;
+      border-radius: 20px;
+      margin: 30px 0;
+      backdrop-filter: blur(8px);
+    }
+
+    .message-box h2 {
+      margin-bottom: 10px;
+    }
+
+    /* Timeline */
+    .timeline {
+      margin: 40px 0;
+      text-align: left;
+    }
+
+    .timeline h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .event {
+      background: rgba(255,255,255,0.2);
+      margin: 10px 0;
+      padding: 15px 20px;
+      border-radius: 15px;
+    }
+
+    /* Slideshow */
+    .slideshow {
+      position: relative;
+      width: 100%;
+      max-width: 600px;
+      margin: 40px auto;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+    }
+
+    .slideshow img {
+      width: 100%;
+      height: 350px;
+      object-fit: cover;
+      display: none;
+    }
+
+    .slideshow img.active {
+      display: block;
+      animation: fade 1.5s;
+    }
+
+    @keyframes fade {
+      from { opacity: 0.3; }
+      to { opacity: 1; }
+    }
+
+    /* Result Screen */
+    .result {
+      display: none;
+      margin-top: 60px;
+      animation: fadeIn 1.5s;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.8); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    .result h1 {
+      font-size: 3rem;
+      margin-bottom: 20px;
+    }
+
+    .big-heart {
+      font-size: 4rem;
+      animation: pulse 1.2s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.3); }
+      100% { transform: scale(1); }
+    }
+
+    /* Music Button */
+    .music-btn {
+      position: fixed;
+      top: 15px;
+      right: 15px;
+      background: #ff004f;
+      border: none;
+      color: white;
+      padding: 10px 15px;
+      border-radius: 20px;
+      cursor: pointer;
+      z-index: 1000;
+    }
+
+    /* Responsive */
+    @media (max-width:600px){
+      .intro h1 { font-size: 2.2rem; }
+      .proposal h1 { font-size: 2.1rem; }
+      .slideshow img { height: 250px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Background Music -->
+<audio id="bgMusic" loop>
+  <source src="music/love.mp3" type="audio/mp3">
+</audio>
+<button class="music-btn" id="musicBtn">🔊 Music</button>
+
+<!-- Floating Hearts -->
+<div id="hearts"></div>
+
+<!-- Intro Screen -->
+<div class="intro" id="intro">
+  <h1>Hey My Love 💖</h1>
+  <p>I made something special just for you...</p>
+  <button class="start-btn" id="startBtn">Open My Heart 💌</button>
+</div>
+
+<!-- Main Content -->
+<div class="container" id="mainScreen">
+
+  <!-- Proposal -->
+  <div class="proposal">
+    <h1>Will You Be My Valentine? 💝</h1>
+    <p>You are my happiness, my peace, and my forever.</p>
+
+    <div class="buttons">
+      <button id="yesBtn">Yes 😍</button>
+      <button id="noBtn">No 🙈</button>
+    </div>
+  </div>
+
+  <!-- Message -->
+  <div class="message-box">
+    <h2>My Message for You 💌</h2>
+    <p>
+      My Love❤️,<br><br>
+      BABY I WILL ALWAYS BE THE SAME FOR YOU AND I THANK YOU ALOT FOR COMING IN MY LIFE AND MAKING MY LIFE WORTH LIVING I JUST CANT IMAGINE MY LIFE WITHOUT YOU BACCHA I LOVE YOU THE MOST BABY, YOU ARE THE MOST PRECIOUS THING HAPPENED TO ME I LOVE YOU BABY<br><br>
+      You are the best thing that ever happened to me. ❤️
+    </p>
+  </div>
+
+  <!-- Timeline -->
+  <div class="timeline">
+    <h2>Our Journey Together 💕</h2>
+
+    <div class="event">🌸 First Time We Met - FOR ME IT WAS CLASS 11TH BUT IG FOR YOU IT WOULD BE COLLEGE</div>
+    <div class="event">💬 Best Day - for me everyday with you is the best day ever BUT TO BE PRECISE IF I TALK ABOUT ONE DAY MY BIRTHDAY I CAN NEVER FORGET IT BACCHA </div>
+    <div class="event">💖 First Date - ONE OF THE BEST DAY (01-02-2026)</div>
+    <div class="event">🌍 Best Memory Together - THAT DIWALI PARTY, THAT BUS RIDE AND EVERYTIME WE ARE ALONE AND TOGETHER</div>
+  </div>
+
+  <!-- Slideshow -->
+  <div class="slideshow">
+    <img src="images/photo1.jpg" class="active" />
+    <img src="images/photo2.jpg" />
+    <img src="images/photo3.jpg" />
+    <img src="images/photo4.jpg" />
+  </div>
+
+  <!-- Result -->
+  <div class="result" id="resultScreen">
+    <h1>You Said YES!!! 💕</h1>
+    <div class="big-heart">❤️❤️❤️</div>
+    <p>
+      I promise to love you, respect you, and stay by your side forever.
+    </p>
+  </div>
+
+</div>
+
+<script>
+
+/* Intro */
+const startBtn = document.getElementById("startBtn");
+const intro = document.getElementById("intro");
+const mainScreen = document.getElementById("mainScreen");
+
+startBtn.addEventListener("click", () => {
+  intro.style.display = "none";
+  mainScreen.style.display = "block";
+  createHearts();
+});
+
+/* Music */
+const music = document.getElementById("bgMusic");
+const musicBtn = document.getElementById("musicBtn");
+let playing = false;
+
+musicBtn.addEventListener("click", () => {
+  if(!playing){
+    music.play();
+    musicBtn.textContent = "🔈 Music";
+  } else {
+    music.pause();
+    musicBtn.textContent = "🔊 Music";
+  }
+  playing = !playing;
+});
+
+/* Yes / No Buttons */
+const yesBtn = document.getElementById("yesBtn");
+const noBtn = document.getElementById("noBtn");
+const result = document.getElementById("resultScreen");
+
+yesBtn.addEventListener("click", () => {
+  result.style.display = "block";
+  window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
+});
+
+noBtn.addEventListener("mouseenter", moveNo);
+noBtn.addEventListener("click", () => yesBtn.click());
+
+function moveNo(){
+  const area = document.querySelector('.buttons');
+  const maxX = area.offsetWidth - noBtn.offsetWidth;
+  const maxY = 60;
+
+  const x = Math.random() * maxX;
+  const y = Math.random() * maxY;
+
+  noBtn.style.left = x + "px";
+  noBtn.style.top = y + "px";
+}
+
+/* Slideshow */
+const slides = document.querySelectorAll('.slideshow img');
+let index = 0;
+
+setInterval(() => {
+  slides[index].classList.remove('active');
+  index = (index + 1) % slides.length;
+  slides[index].classList.add('active');
+}, 3000);
+
+/* Floating Hearts */
+function createHearts(){
+  setInterval(() => {
+    const heart = document.createElement("div");
+    heart.classList.add("heart-float");
+    heart.innerHTML = "❤️";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.fontSize = Math.random() * 20 + 20 + "px";
+
+    document.body.appendChild(heart);
+
+    setTimeout(() => {
+      heart.remove();
+    }, 8000);
+
+  }, 500);
+}
+
+</script>
+
+</body>
+</html>
